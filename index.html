@@ -8,7 +8,7 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%23f6f9fc%22/><text x=%2250%22 y=%2268%22 font-size=%2256%22 font-family=%22DM Sans,ui-sans-serif,system-ui%22 font-weight=%22600%22 fill=%22%230a2540%22 text-anchor=%22middle%22>S</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;600;700;800&family=Big+Shoulders+Text:wght@400;500;600&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
       --background: #f6f9fc;
@@ -45,31 +45,32 @@
     /* ────────────── letter (left) ────────────── */
     .wordmark {
       font-family: "Big Shoulders Display", "Industry", "DIN Next", ui-sans-serif, sans-serif;
-      font-weight: 600;
-      font-size: clamp(1.5rem, 2.2vw, 1.875rem);
-      letter-spacing: 0.04em;
+      font-weight: 700;
+      font-size: clamp(2.5rem, 4vw, 3.5rem);
+      letter-spacing: 0.025em;
       text-transform: uppercase;
       color: var(--foreground);
       margin: 0;
-      line-height: 1.05;
+      line-height: 1;
     }
 
     .est {
       font-family: "DM Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-      font-size: 0.65rem;
+      font-size: 0.7rem;
       text-transform: uppercase;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.18em;
       color: var(--foreground-dimmer);
-      margin: 0.5rem 0 0;
+      margin: 0.75rem 0 0;
     }
 
     .letter h1 {
-      margin: 3.5rem 0 0;
-      font-weight: 600;
-      letter-spacing: -0.035em;
-      line-height: 1.05;
-      font-size: clamp(2rem, 3.6vw, 2.75rem);
-      color: var(--foreground);
+      margin: 3rem 0 0;
+      font-family: "Big Shoulders Text", "Big Shoulders Display", ui-sans-serif, sans-serif;
+      font-weight: 500;
+      letter-spacing: 0;
+      line-height: 1.1;
+      font-size: clamp(1.625rem, 2.6vw, 2rem);
+      color: var(--foreground-dim);
       text-wrap: balance;
     }
 
@@ -153,20 +154,39 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
+    }
+
+    .aside-card {
+      background: var(--foreground);
+      color: #cbd5e1;
+      padding: 1.5rem 1.25rem;
+      border-radius: 4px;
       font-family: "DM Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
       font-size: 0.8125rem;
       line-height: 1.55;
+      box-shadow:
+        0 1px 2px rgba(10, 37, 64, 0.2),
+        0 0 0 1px rgba(10, 37, 64, 0.06);
     }
 
     .aside .label {
       font-size: 0.65rem;
       text-transform: uppercase;
       letter-spacing: 0.2em;
-      color: var(--foreground-dimmer);
+      color: #64748b;
       margin: 0 0 0.5rem;
     }
 
-    .aside .block { margin-top: 1.5rem; }
+    .aside .block { margin-top: 1.25rem; }
+    .aside .block:first-child { margin-top: 0; }
+
+    .aside a {
+      color: #e2e8f0;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.15s ease, color 0.15s ease;
+    }
+    .aside a:hover { color: #ffffff; border-bottom-color: #ffffff; }
 
     .aside a {
       color: var(--foreground-dim);
@@ -195,7 +215,7 @@
   <div class="page">
     <article class="letter">
       <p class="wordmark">The Standard Reasoning Company</p>
-      <p class="est">Est. 2026</p>
+      <p class="est">Established 2026</p>
 
       <h1>Reasoning systems for the real world.</h1>
 
@@ -234,13 +254,15 @@
     </article>
 
     <aside class="aside">
-      <div class="block">
-        <p class="label">Est.</p>
-        <div>2026</div>
-      </div>
-      <div class="block">
-        <p class="label">Contact</p>
-        <a href="mailto:hello@standardreasoning.com">hello@standardreasoning.com</a>
+      <div class="aside-card">
+        <div class="block">
+          <p class="label">Established</p>
+          <div>2026</div>
+        </div>
+        <div class="block">
+          <p class="label">Contact</p>
+          <a href="mailto:hello@standardreasoning.com">hello@standardreasoning.com</a>
+        </div>
       </div>
     </aside>
   </div>
