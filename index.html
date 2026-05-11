@@ -33,12 +33,13 @@
 
     .page {
       max-width: 980px;
+      min-height: calc(100vh - 0px);
       margin: 0 auto;
       padding: 7rem 1.5rem 4rem;
       display: grid;
       grid-template-columns: minmax(0, 1fr) 12rem;
       gap: 4rem;
-      align-items: start;
+      align-items: stretch;
     }
 
     /* ────────────── letter (left) ────────────── */
@@ -70,11 +71,13 @@
     }
 
     .letter h2 {
-      margin: 2.5rem 0 0.5rem;
-      font-weight: 600;
-      font-size: 1rem;
-      letter-spacing: -0.005em;
-      color: var(--foreground);
+      margin: 2.75rem 0 1rem;
+      font-family: "DM Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+      font-weight: 500;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--foreground-dimmer);
     }
 
     .letter p {
@@ -88,22 +91,41 @@
     .projects {
       list-style: none;
       padding: 0;
-      margin: 0.75rem 0 0;
+      margin: 1rem 0 0;
+      display: grid;
+      gap: 0.625rem;
     }
     .projects > li {
-      padding: 0.25rem 0;
-      color: var(--foreground-dim);
-      font-size: 1rem;
-      line-height: 1.5;
+      background: #ffffff;
+      padding: 1rem 1.25rem;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      box-shadow:
+        0 1px 2px rgba(50, 50, 93, 0.06),
+        0 0 0 1px rgba(50, 50, 93, 0.04);
+      border-radius: 4px;
+    }
+    .projects > li:hover {
+      transform: translateY(-1px);
+      box-shadow:
+        0 4px 12px -2px rgba(50, 50, 93, 0.12),
+        0 0 0 1px rgba(50, 50, 93, 0.06);
     }
     .projects .name {
+      display: inline-block;
       color: var(--foreground);
-      font-weight: 500;
+      font-weight: 600;
+      font-size: 1rem;
       text-decoration: none;
       border-bottom: 1px solid transparent;
       transition: border-color 0.15s ease, color 0.15s ease;
     }
     .projects a.name:hover { color: var(--link); border-bottom-color: var(--link); }
+    .projects .desc {
+      margin: 0.25rem 0 0;
+      color: var(--foreground-dim);
+      font-size: 0.9375rem;
+      line-height: 1.5;
+    }
 
     .signoff {
       margin-top: 3rem;
@@ -116,8 +138,10 @@
 
     /* ────────────── aside (right) ────────────── */
     .aside {
-      position: sticky;
-      top: 7rem;
+      align-self: stretch;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
       font-family: "DM Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
       font-size: 0.8125rem;
       line-height: 1.55;
@@ -131,8 +155,7 @@
       margin: 0 0 0.5rem;
     }
 
-    .aside .block { margin-top: 2rem; }
-    .aside .block:first-child { margin-top: 0; }
+    .aside .block { margin-top: 1.5rem; }
 
     .aside a {
       color: var(--foreground-dim);
@@ -176,9 +199,18 @@
       <h2>The work</h2>
       <p>Three projects right now, each a different surface for the same underlying bet.</p>
       <ul class="projects">
-        <li><a href="https://praetom.com" class="name">praetom</a> · production intelligence for AI-generated code</li>
-        <li><a href="https://cofoundri.com" class="name">cofoundri</a> · operational infrastructure for the next million companies</li>
-        <li><span class="name">ripley</span> · real-time perception for the road</li>
+        <li>
+          <a href="https://praetom.com" class="name">praetom</a>
+          <p class="desc">Production intelligence for AI-generated code.</p>
+        </li>
+        <li>
+          <a href="https://cofoundri.com" class="name">cofoundri</a>
+          <p class="desc">Operational infrastructure for the next million companies.</p>
+        </li>
+        <li>
+          <span class="name">ripley</span>
+          <p class="desc">Real-time perception for the road.</p>
+        </li>
       </ul>
 
       <h2>Posture</h2>
@@ -196,7 +228,7 @@
       </div>
       <div class="block">
         <p class="label">Contact</p>
-        <a href="mailto:hello@standardreasoningcompany.com">hello@standardreasoningcompany.com</a>
+        <a href="mailto:hello@standardreasoning.com">hello@standardreasoning.com</a>
       </div>
     </aside>
   </div>
