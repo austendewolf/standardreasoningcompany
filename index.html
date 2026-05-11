@@ -46,12 +46,12 @@
     .wordmark {
       font-family: "Big Shoulders Display", "Industry", "DIN Next", ui-sans-serif, sans-serif;
       font-weight: 700;
-      font-size: clamp(2.5rem, 4vw, 3.5rem);
-      letter-spacing: 0.025em;
+      font-size: clamp(3rem, 5.5vw, 4.75rem);
+      letter-spacing: 0.02em;
       text-transform: uppercase;
       color: var(--foreground);
       margin: 0;
-      line-height: 1;
+      line-height: 0.95;
     }
 
     .est {
@@ -64,12 +64,12 @@
     }
 
     .letter h1 {
-      margin: 3rem 0 0;
-      font-family: "Big Shoulders Text", "Big Shoulders Display", ui-sans-serif, sans-serif;
+      margin: 2.5rem 0 0;
+      font-family: "DM Sans", ui-sans-serif, system-ui, sans-serif;
       font-weight: 500;
-      letter-spacing: 0;
-      line-height: 1.1;
-      font-size: clamp(1.625rem, 2.6vw, 2rem);
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+      font-size: clamp(1.125rem, 1.7vw, 1.375rem);
       color: var(--foreground-dim);
       text-wrap: balance;
     }
@@ -154,26 +154,29 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
+      position: sticky;
+      bottom: 1.5rem;
+      top: auto;
     }
 
     .aside-card {
-      background: var(--foreground);
-      color: #cbd5e1;
+      background: #171717;
+      color: #d4d4d4;
       padding: 1.5rem 1.25rem;
       border-radius: 4px;
       font-family: "DM Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
       font-size: 0.8125rem;
       line-height: 1.55;
       box-shadow:
-        0 1px 2px rgba(10, 37, 64, 0.2),
-        0 0 0 1px rgba(10, 37, 64, 0.06);
+        0 1px 2px rgba(0, 0, 0, 0.18),
+        0 0 0 1px rgba(0, 0, 0, 0.08);
     }
 
     .aside .label {
       font-size: 0.65rem;
       text-transform: uppercase;
       letter-spacing: 0.2em;
-      color: #64748b;
+      color: #737373;
       margin: 0 0 0.5rem;
     }
 
@@ -181,7 +184,7 @@
     .aside .block:first-child { margin-top: 0; }
 
     .aside a {
-      color: #e2e8f0;
+      color: #e5e5e5;
       text-decoration: none;
       border-bottom: 1px solid transparent;
       transition: border-color 0.15s ease, color 0.15s ease;
