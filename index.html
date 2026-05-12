@@ -100,11 +100,12 @@
       padding: 0;
       margin: 1rem 0 0;
       display: grid;
-      gap: 0.625rem;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.5rem;
     }
     .projects > li {
       background: #ffffff;
-      padding: 1rem 1.25rem;
+      padding: 0.75rem 0.875rem;
       transition: transform 0.15s ease, box-shadow 0.15s ease;
       box-shadow:
         0 1px 2px rgba(50, 50, 93, 0.06),
@@ -121,7 +122,7 @@
       display: inline-block;
       color: var(--foreground);
       font-weight: 600;
-      font-size: 1rem;
+      font-size: 0.875rem;
       text-decoration: none;
       border-bottom: 1px solid transparent;
       transition: border-color 0.15s ease, color 0.15s ease;
@@ -130,8 +131,12 @@
     .projects .desc {
       margin: 0.25rem 0 0;
       color: var(--foreground-dim);
-      font-size: 0.9375rem;
-      line-height: 1.5;
+      font-size: 0.8125rem;
+      line-height: 1.4;
+    }
+
+    @media (max-width: 600px) {
+      .projects { grid-template-columns: 1fr; }
     }
 
     .signoff {
@@ -224,7 +229,7 @@
           <p class="desc">Operational infrastructure for the next million companies.</p>
         </li>
         <li>
-          <span class="name">ripley</span>
+          <a href="https://antevant.com" class="name">antevant</a>
           <p class="desc">Real-time perception for the road.</p>
         </li>
       </ul>
