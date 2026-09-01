@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark light" />
+    <title>Standard Reasoning sign-in link</title>
+  </head>
+  <body style="margin:0; padding:0; background:#0b0c0d;">
+    <!-- Preheader: shown in the inbox list, hidden in the body. -->
+    <div style="display:none; max-height:0; overflow:hidden; opacity:0;">
+      A sign-in link for standardreasoningcompany.com. Valid for one hour.
+    </div>
+
+    <!-- Outer table carries the margin. One value on all four sides, which
+         is the whole point of the sheet. -->
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#0b0c0d;">
+      <tr>
+        <td align="center" style="padding:40px;">
+
+          <!-- Marginalia, above the frame, as on the site. -->
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:560px;">
+            <tr>
+              <td style="padding:0 20px 10px; font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace; font-size:9px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:#edeff1;">
+                Standard Reasoning Co.
+              </td>
+              <td align="right" style="padding:0 20px 10px; font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:#5b6266;">
+                Sign In
+              </td>
+            </tr>
+          </table>
+
+          <!-- The frame. -->
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:560px; border:1px solid #1e2225; background:#0b0c0d;">
+
+            <!-- Title block -->
+            <tr>
+              <td style="padding:32px 20px 28px; border-bottom:1px solid #1e2225;">
+                <div style="font-family:Helvetica,Arial,sans-serif; font-size:34px; line-height:0.92; font-weight:800; letter-spacing:-1px; text-transform:uppercase; color:#edeff1;">
+                  Sign&nbsp;In
+                </div>
+              </td>
+            </tr>
+
+            <!-- Data plate -->
+            <tr>
+              <td style="padding:0; border-bottom:1px solid #1e2225;">
+                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                  <tr>
+                    <td style="padding:9px 20px; font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:#5b6266;">Method</td>
+                    <td align="right" style="padding:9px 20px; font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace; font-size:10px; letter-spacing:1px; text-transform:uppercase; color:#969ca1;">Emailed Link</td>
+                  </tr>
+                  <tr>
+                    <td style="padding:9px 20px; border-top:1px solid #1e2225; font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:#5b6266;">Valid For</td>
+                    <td align="right" style="padding:9px 20px; border-top:1px solid #1e2225; font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace; font-size:10px; letter-spacing:1px; text-transform:uppercase; color:#969ca1;">One Hour</td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <!-- Section rule -->
+            <tr>
+              <td style="padding:7px 20px; background:#0f1113; border-bottom:1px solid #1e2225; font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace; font-size:9px; font-weight:600; letter-spacing:3px; text-transform:uppercase; color:#edeff1;">
+                // Access
+              </td>
+            </tr>
+
+            <!-- Body -->
+            <tr>
+              <td style="padding:28px 20px 32px;">
+                <p style="margin:0 0 22px; font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace; font-size:12px; line-height:1.8; color:#969ca1;">
+                  Opening this link signs the account in. It works on this device or any other, once.
+                </p>
+
+                <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+                  <tr>
+                    <td style="background:#edeff1;">
+                      <a href="{{ .RedirectTo }}&token_hash={{ .TokenHash }}&type=magiclink"
+                         style="display:inline-block; padding:13px 30px; font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace; font-size:10px; font-weight:600; letter-spacing:3px; text-transform:uppercase; color:#0b0c0d; text-decoration:none;">
+                        Sign In
+                      </a>
+                    </td>
+                  </tr>
+                </table>
+
+                <p style="margin:22px 0 0; font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace; font-size:10px; line-height:1.7; color:#5b6266;">
+                  If the button does not open, paste this into a browser:
+                </p>
+                <p style="margin:6px 0 0; font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace; font-size:10px; line-height:1.7; color:#969ca1; word-break:break-all;">
+                  {{ .RedirectTo }}&token_hash={{ .TokenHash }}&type=magiclink
+                </p>
+              </td>
+            </tr>
+
+            <!-- Foot -->
+            <tr>
+              <td style="padding:0; border-top:1px solid #1e2225;">
+                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                  <tr>
+                    <td style="padding:11px 20px; font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:#5b6266;">Est. 2026</td>
+                    <td align="right" style="padding:11px 20px; font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace; font-size:9px; letter-spacing:1px; text-transform:uppercase; color:#5b6266;">standardreasoningcompany.com</td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+
+          <!-- Marginalia, below the frame. -->
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:560px;">
+            <tr>
+              <td style="padding:10px 20px 0; font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace; font-size:9px; letter-spacing:1px; line-height:1.6; color:#3f4448;">
+                Not expecting this? Nothing happens until the link is opened, and it expires on its own.
+              </td>
+            </tr>
+          </table>
+
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

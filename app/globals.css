@@ -1,0 +1,858 @@
+/**
+ * Standardized Structural Rationalism.
+ *
+ * Four rules govern everything below:
+ *   1. The grid is visible. Hairlines are the decoration; nothing else is.
+ *   2. One margin value, --cross, on all four sides. The sheet is full
+ *      bleed so that margin can never read as uneven.
+ *   3. Type carries the hierarchy. Massive grotesque against small mono,
+ *      with nothing in between competing.
+ *   4. Color is information, never ornament. One signal amber, used only
+ *      to mark an operating venture.
+ */
+
+:root {
+  --paper: #0b0c0d;
+  --panel: #0f1113;
+  --ink: #edeff1;
+  --ink-2: #969ca1;
+  --ink-3: #5b6266;
+
+  --rule: #1e2225;
+  --rule-2: #2b3136;
+
+  --signal: #d29a3f;
+  /* Reserved for a healthy endpoint only, so green on this page always
+     means something answered. */
+  --live: #58a56e;
+
+  --col-index: 4.25rem;
+  --col-status: 11rem;
+
+  --step: 1.25rem;
+
+  /* The single margin value. It is the gap between the sheet and the
+     viewport on all four sides, the distance the frame rules overshoot at
+     the corners, and the band the marginalia sits in. One number, so the
+     border around the content can never read as wider on one axis. */
+  --cross: 2.5rem;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body { margin: 0; padding: 0; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------------------------------------------------------------- frame */
+
+/**
+ * The sheet holds the four frame rules and the margin they overshoot
+ * into. Its padding equals --cross on every side, which is what makes
+ * the border around the content read as even.
+ */
+/**
+ * Full bleed, deliberately. Capping the width and centring would leave
+ * more room at the sides than at the head and foot on any wide screen,
+ * and an uneven margin is the one thing a drawing sheet cannot have.
+ * --cross is therefore the margin on all four sides at every width.
+ */
+.sheet {
+  position: relative;
+  padding: var(--cross);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/**
+ * Drafted rather than bordered. Each rule spans the sheet's full height
+ * or width, so it runs past the two it meets instead of stopping at
+ * them, and every corner resolves as a crossing. This is the difference
+ * between a box and a sheet of grid paper.
+ */
+.rule-v,
+.rule-h {
+  position: absolute;
+  background: var(--rule);
+  pointer-events: none;
+}
+.rule-v { top: 0; bottom: 0; width: 1px; }
+.rule-h { left: 0; right: 0; height: 1px; }
+
+/* Set one pixel outside the content box, so the rules sit where a border
+   would and the crossing is exactly --cross in each direction. */
+.rule-v-l { left: calc(var(--cross) - 1px); }
+.rule-v-r { right: calc(var(--cross) - 1px); }
+.rule-h-t { top: calc(var(--cross) - 1px); }
+.rule-h-b { bottom: calc(var(--cross) - 1px); }
+
+/* ---------------------------------------------------------- marginalia */
+
+/**
+ * The running header and footer live out here rather than inside the
+ * frame. Identity at the head, sign-off at the foot, in the margin the
+ * frame already established, so they cost the content no space and the
+ * frame encloses nothing but the work itself.
+ *
+ * The inset matches the frame's own --step, so the head and foot line up
+ * with the content beneath them instead of hanging off the rules.
+ */
+.marg {
+  position: absolute;
+  left: var(--cross);
+  right: var(--cross);
+  height: var(--cross);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0 var(--step);
+  font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+.marg-t { top: 0; }
+.marg-b { bottom: 0; }
+
+.marg a {
+  color: var(--ink-2);
+  text-decoration: none;
+  transition: color 0.12s ease;
+}
+.marg a:hover { color: var(--ink); }
+.marg .mark { color: var(--ink); font-weight: 600; }
+
+/**
+ * Every internal rule stops at the verticals. Only the frame crosses,
+ * which keeps the corners as the one place the eye is asked to notice.
+ */
+.frame {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/**
+ * Ruled but empty. A datasheet does not centre its content, it fills the
+ * plate and signs off at the foot, so this absorbs the slack and keeps
+ * the footer on the bottom rule.
+ */
+.fill { flex: 1 1 auto; }
+
+/* ------------------------------------------------------------- masthead */
+
+.masthead {
+  display: grid;
+  grid-template-columns: 1fr 17rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+/* Title block. Centred, so the wordmark sits in the middle of whatever
+   height the plate beside it establishes rather than falling to the foot. */
+.masthead-title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.wordmark {
+  margin: 0;
+  padding: 2rem var(--step);
+  /* Plex Sans tops out at 700, which carries at display size. */
+  font-weight: 700;
+  /* 25% down from 2.5 / 6.6 / 5.25. */
+  font-size: clamp(1.875rem, 4.95vw, 3.9375rem);
+  line-height: 0.9;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+  color: var(--ink);
+  /* Held off full strength so it sits on the paper rather than on top of
+     it. */
+  opacity: 0.8;
+}
+
+
+/* -------------------------------------------------------- connections */
+
+/**
+ * The masthead's right column, and the only thing in it. Everything here
+ * is measured at the moment of reading, which is what earns it the space
+ * a static specification used to occupy.
+ */
+.conn {
+  border-left: 1px solid var(--rule);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.conn-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem var(--step);
+  border-bottom: 1px solid var(--rule);
+  font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.conn-title { color: var(--ink-3); }
+/* The lamp only lives once this browser is actually in the channel. */
+.ping-live {
+  background: var(--live);
+  animation: ping 2.4s ease-in-out infinite;
+}
+
+/* The reading itself, sized to be read across the room. Set in the
+   display face so it answers the wordmark rather than the metadata. */
+.conn-body {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1.25rem var(--step);
+  min-height: 0;
+}
+.conn-big {
+  font-size: clamp(2.5rem, 5vw, 3.75rem);
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.conn-list {
+  list-style: none;
+  margin: 0.75rem 0 0;
+  padding: 0;
+  overflow: hidden;
+}
+.conn-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.1875rem 0;
+  font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 0.625rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.conn-n { color: var(--ink-3); }
+.conn-pending { color: var(--ink-3); }
+
+.conn-foot {
+  display: flex;
+  border-top: 1px solid var(--rule);
+}
+.conn-metric {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 0.5rem var(--step);
+  border-left: 1px solid var(--rule);
+  font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+.conn-metric:first-child { border-left: 0; }
+.conn-metric-key {
+  font-size: 0.5625rem;
+  letter-spacing: 0.2em;
+  color: var(--ink-3);
+}
+.conn-metric-val {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--ink-2);
+}
+
+/**
+ * The data plate. Label/value pairs in mono, each on its own ruled line,
+ * reading as a machine's stamped specification rather than a subtitle.
+ */
+.plate {
+  margin: 0;
+  border-left: 1px solid var(--rule);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.plate-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1rem;
+  align-items: baseline;
+  padding: 0.5rem var(--step);
+  border-top: 1px solid var(--rule);
+}
+.plate-row:first-child { border-top: 0; }
+.plate dt {
+  font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.plate dd {
+  margin: 0;
+  font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+/* ------------------------------------------------------- section header */
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.5rem var(--step);
+  background: var(--panel);
+  border-bottom: 1px solid var(--rule);
+  font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+.section-head .title { color: var(--ink); }
+.section-head .count { color: var(--ink-3); }
+/* Sections are numbered because the site is an index, not a narrative. */
+.section-head .section-no { color: var(--ink-3); margin-right: 0.75rem; }
+
+/* ------------------------------------------------------------- mandate */
+
+/**
+ * Body copy is monospaced and set short. It is a statement of what the
+ * workshop is, written to be read once, so it takes a narrow measure and
+ * no more room than it needs.
+ */
+/* The measure sits on the text, not the section, so the section's own
+   rule still runs the full width of the sheet. */
+.mandate {
+  padding: 2.25rem var(--step) 2.5rem;
+  border-bottom: 1px solid var(--rule);
+}
+.mandate p {
+  max-width: 46rem;
+  margin: 0 0 1.125rem;
+  font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 0.75rem;
+  line-height: 1.85;
+  color: var(--ink-2);
+}
+.mandate p:last-child { margin-bottom: 0; }
+/* The opening statement is the one the eye should land on. */
+.mandate p:first-child { color: var(--ink); }
+
+/* ------------------------------------------------------------------ cta */
+
+.cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.25rem var(--step);
+  border-bottom: 1px solid var(--rule);
+}
+.cta-copy {
+  margin: 0;
+  font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 0.75rem;
+  line-height: 1.7;
+  color: var(--ink-2);
+}
+.cta-action {
+  flex: none;
+  background: var(--ink);
+  color: var(--paper);
+  border: 1px solid var(--ink);
+  font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 0.6875rem 1.5rem;
+  text-decoration: none;
+  transition: opacity 0.12s ease;
+}
+.cta-action:hover { opacity: 0.86; }
+
+/* ------------------------------------------------------------- register */
+
+.register { border-bottom: 1px solid var(--rule); }
+
+.row {
+  display: grid;
+  grid-template-columns:
+    var(--col-index) minmax(9rem, 1fr) 2.2fr var(--col-status);
+  align-items: center;
+  border-bottom: 1px solid var(--rule);
+}
+.row:last-child { border-bottom: 0; }
+
+.row > * {
+  padding: 0.9375rem var(--step);
+  border-left: 1px solid var(--rule);
+  min-width: 0;
+}
+.row > *:first-child { border-left: 0; }
+
+/* Column headings. Same grid, so every rule below lines up exactly. */
+.row-head > * {
+  padding-top: 0.4375rem;
+  padding-bottom: 0.4375rem;
+  font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 0.5625rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.row-entry { transition: background-color 0.12s ease; }
+.row-entry:hover { background: var(--panel); }
+
+.idx {
+  font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--ink-3);
+}
+
+/**
+ * Set in the mono, not the display face. These are designations in a
+ * catalog, and every other cell in the row is mono, so display type at
+ * body size made them read as logos dropped into the table.
+ */
+.designation {
+  font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: lowercase;
+  color: var(--ink);
+  text-decoration: none;
+}
+a.designation { position: relative; }
+a.designation::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 1px;
+  background: var(--ink);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.16s ease;
+}
+a.designation:hover::after { transform: scaleX(1); }
+
+/**
+ * Each entry is a data plate rather than a sentence. The label column is
+ * fixed so every plate in the catalog reads down the same axis.
+ */
+.spec {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  min-width: 0;
+}
+.spec-row {
+  display: grid;
+  grid-template-columns: 5.25rem minmax(0, 1fr);
+  gap: 0.875rem;
+  align-items: baseline;
+}
+.spec-key {
+  font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 0.5rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.spec-val {
+  font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 0.6875rem;
+  line-height: 1.65;
+  color: var(--ink-2);
+}
+
+/**
+ * The one cell in a plate that is a door. It sits at full ink so it reads
+ * as reachable against the rest of the plate, and carries a standing
+ * underline rather than a hover-only one, since a link nobody hovers is a
+ * link nobody finds.
+ */
+.spec-link {
+  justify-self: start;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+  transition: border-color 0.16s ease;
+}
+.spec-link::after { content: " \2192"; }
+.spec-link:hover { border-bottom-color: var(--ink); }
+
+/**
+ * Bracket notation carries the state. The word itself is the indicator,
+ * so the reading survives without color; color only sharpens it.
+ */
+/**
+ * Live health rather than a declared status. The lamp is the reading and
+ * the word confirms it, so the column still works without colour. Only an
+ * answering endpoint pulses, which is the point: motion here means
+ * something was actually contacted.
+ */
+.health {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  white-space: nowrap;
+  color: var(--ink-2);
+}
+.ping {
+  flex: none;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ink-3);
+}
+.health-ms {
+  color: var(--ink-3);
+  letter-spacing: 0.08em;
+}
+
+.health-operational { color: var(--ink); }
+.health-operational .ping {
+  background: var(--live);
+  animation: ping 2.4s ease-in-out infinite;
+}
+/* Breathes in place rather than radiating. A spreading box-shadow escapes
+   the cell it belongs to, and this column has a fixed width. */
+@keyframes ping {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .health-operational .ping { animation: none; }
+}
+
+/* Contacted and did not answer. Squared off, so it reads as a fault
+   rather than as a dimmer version of healthy. */
+.health-unreachable { color: var(--signal); }
+.health-unreachable .ping {
+  border-radius: 0;
+  background: none;
+  border: 1px solid var(--signal);
+}
+
+.health-retired { color: var(--ink-3); }
+.health-retired .ping {
+  background: none;
+  border: 1px solid var(--ink-3);
+}
+
+.shelved .designation,
+.shelved .idx { color: var(--ink-3); }
+.shelved .spec-val { color: var(--ink-3); }
+
+/* --------------------------------------------------------------- footer */
+
+/* ----------------------------------------------------------------- auth */
+
+/**
+ * Auth pages are the same document as the index: running header, title
+ * block with its own plate, ruled section, content. Only the title
+ * changes, so the company name is stated once, in the bar.
+ */
+/* Scaled by the same 25%, so the index and the auth pages keep their
+   relationship rather than converging on one size. */
+.masthead-sm .wordmark {
+  font-size: clamp(1.4rem, 3vw, 2.25rem);
+  padding: 1.5rem var(--step);
+}
+
+.auth-body {
+  max-width: 32rem;
+  padding: 2.5rem var(--step) 3rem;
+}
+/**
+ * Method selector. Reads as a row of settable positions on a panel rather
+ * than as browser tabs: the set position is filled, the others are not.
+ */
+.method {
+  display: flex;
+  border-bottom: 1px solid var(--rule);
+}
+.method-opt {
+  flex: 0 0 auto;
+  background: transparent;
+  border: 0;
+  border-right: 1px solid var(--rule);
+  color: var(--ink-3);
+  font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 0.5625rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 0.625rem var(--step);
+  cursor: pointer;
+  transition: color 0.12s ease, background-color 0.12s ease;
+}
+.method-opt:hover { color: var(--ink-2); }
+.method-opt.is-set {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.auth-block { margin-top: 2rem; }
+
+.auth-label {
+  display: block;
+  font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 0.5625rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 0.5rem;
+}
+.auth-input {
+  width: 100%;
+  background: transparent;
+  border: 1px solid var(--rule-2);
+  color: var(--ink);
+  font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 0.875rem;
+  padding: 0.6875rem 0.75rem;
+  outline: none;
+  transition: border-color 0.12s ease;
+}
+.auth-input:focus { border-color: var(--ink-2); }
+.auth-button {
+  margin-top: 0.75rem;
+  width: 100%;
+  background: var(--ink);
+  color: var(--paper);
+  border: 1px solid var(--ink);
+  font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 0.75rem;
+  cursor: pointer;
+  transition: opacity 0.12s ease;
+}
+.auth-button:hover { opacity: 0.86; }
+.auth-button:disabled { opacity: 0.4; cursor: default; }
+.auth-note {
+  color: var(--ink-2);
+  font-size: 0.8125rem;
+  margin: 0;
+  padding-left: 0.875rem;
+  border-left: 1px solid var(--rule-2);
+}
+.auth-label-2 { margin-top: 1rem; }
+
+/**
+ * Stage transition. Identifier-first means the form changes under the
+ * reader between one step and the next, so each stage announces itself by
+ * arriving rather than by swapping in place. Short and flat, in keeping
+ * with everything else: no easing that draws attention to itself.
+ */
+.stage {
+  animation: stage-in 0.22s cubic-bezier(0.2, 0, 0.2, 1) both;
+}
+@keyframes stage-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .stage { animation: none; }
+}
+
+/* The resolved address, held in the plate so it stays visible across stages. */
+.plate-value {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-transform: none;
+  letter-spacing: 0.04em;
+}
+
+/* Alternate routes out of a stage, stacked under the primary action. */
+.auth-alts {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+.auth-alts .auth-back { margin-top: 0; }
+
+/**
+ * Secondary action. Sits under the primary as a plain line of type, so it
+ * reads as the other way through rather than a competing button.
+ */
+.auth-back {
+  display: block;
+  margin-top: 0.875rem;
+  background: none;
+  border: 0;
+  padding: 0;
+  font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 0.5625rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  cursor: pointer;
+  transition: color 0.12s ease;
+}
+.auth-back:hover { color: var(--ink); }
+
+/* Sets up a form that needs explaining before the first field. */
+.auth-intro {
+  margin: 0 0 1.5rem;
+  font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 0.6875rem;
+  line-height: 1.75;
+  color: var(--ink-2);
+}
+
+.auth-hint {
+  margin: 0.5rem 0 0;
+  font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 0.5625rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.auth-done { color: var(--ink-2); }
+
+.auth-error {
+  color: var(--signal);
+  font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  margin-top: 0.875rem;
+}
+
+.record {
+  display: grid;
+  grid-template-columns: 9rem 1fr;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 1.5rem;
+}
+.record > * { padding: 0.8125rem var(--step) 0.8125rem 0; }
+.record .key {
+  font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 0.5625rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.record .value {
+  font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 0.8125rem;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+
+/* ------------------------------------------------------------ responsive */
+
+@media (max-width: 860px) {
+  /* The frame stays on small screens. It is the identity, not decoration,
+     so it narrows rather than disappearing. The margin still has to seat
+     a full email address, so it gives up less width than --step does. */
+  :root {
+    --step: 1rem;
+    --cross: 1.75rem;
+  }
+
+  .marg {
+    font-size: 0.5rem;
+    letter-spacing: 0.1em;
+    gap: 0.75rem;
+  }
+
+  .masthead { grid-template-columns: 1fr; }
+  .wordmark { padding: 1.5rem var(--step); }
+  .plate,
+  .conn { border-left: 0; border-top: 1px solid var(--rule); }
+
+  .mandate { padding: 1.75rem var(--step) 2rem; }
+
+  .cta { flex-direction: column; align-items: stretch; gap: 1rem; }
+  .cta-action { text-align: center; }
+
+  /* Title and its count stack rather than compete for one line, which at
+     this width splits the title below its own metadata. */
+  .section-head {
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 0.5625rem;
+    letter-spacing: 0.12em;
+    gap: 0.3125rem;
+  }
+  .section-head .title { white-space: nowrap; }
+
+  .row {
+    grid-template-columns: 1fr auto;
+    padding: 0.875rem var(--step);
+    gap: 0.1875rem 1rem;
+  }
+  .row > * { padding: 0; border-left: 0; }
+  .row-head { display: none; }
+
+  .idx {
+    grid-column: 1;
+    font-size: 0.625rem;
+    letter-spacing: 0.16em;
+  }
+  .health { grid-column: 2; grid-row: 1 / span 2; align-self: start; }
+  .designation { grid-column: 1; }
+  /* The plate stacks: label over value, since there is no room to keep
+     the label column and still set the value to a readable measure. */
+  .spec { grid-column: 1 / -1; margin-top: 0.5rem; gap: 0.5rem; }
+  .spec-row { grid-template-columns: 1fr; gap: 0.1875rem; }
+}
