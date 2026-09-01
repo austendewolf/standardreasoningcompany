@@ -78,33 +78,47 @@ govern every string on the site:
 2. **Objective.** Outcomes are stated as fact, in the register of a data
    plate or a material estimate sheet.
 3. **Specification driven.** Command verbs, or labelled specification
-   rows: `PURPOSE`, `FUNCTION`, `VER`, `STATUS`.
+   rows: `PURPOSE`, `FUNCTION`, `ACCESS`.
 4. **No fluff and no negative space.** Hype adjectives are replaced with
    engineering terms (calibrated, standardized, structural, foundational).
    The copy never defines the workshop by what it is not; stating the
    absence of something invites a defensive read and spends words on a
    comparison nobody asked for.
 
-Facts on this page are checkable or absent. Version numbers come from the
-instrument's own manifest, which is why only praetom carries one, and
-`--` means nothing is published rather than nothing exists. No uptime or
-reliability figure appears anywhere, because there is no measurement
-behind one.
+Facts on this page are checkable or absent. The health column used to be a
+word typed into a file, which is a claim rather than a fact; `lib/health.ts`
+now reaches each endpoint at request time and reports what came back, so
+the page can be wrong about a tool for at most one revalidation window.
+A tool with no endpoint reads `Retired`, which is a different fact from an
+endpoint that fails to answer.
 
 `app/sheet.tsx` owns the frame and the head and foot set in its margin.
 Every page is that sheet, so auth surfaces carry their own title block
 and plate exactly as the index does, and the company name is stated once,
 in the margin.
 
-Adding an instrument means one entry in `CATALOG` in `app/page.tsx`. The
-counts in the plate and the section header derive from it. Version reads
-`--` where there is nothing published to report, rather than carrying a
-number that was never real.
+Adding a tool means one entry in `TOOLS` in `app/page.tsx`. The counts in
+the section header derive from it, and so does the health check: `url` is
+the endpoint pinged, and its absence is what marks a tool retired.
+
+`access` is optional and holds the way in where there is one that is not
+simply the site, so a plate can hand somebody the thing rather than the
+front door. The goodest carries its TestFlight link there.
 
 ## Deployment
 
 Railway project `standardreasoning`, service `web`, built with Railpack.
-`railway up --service web` deploys from the working tree.
+
+**A push to `main` deploys.** The service watches
+`standard-reasoning/standardreasoningcompany`, connected 08/31/2026. Before
+that it had no source at all: every release was a `railway up` upload, the
+last one on 08/04/2026, so pushing to origin changed the repository and
+left the running site alone. That gap is the thing this section exists to
+prevent somebody rediscovering.
+
+`railway up --service web` still deploys from the working tree, which is
+the override for shipping something uncommitted. It should be the
+exception now.
 
 Three variables are set on the service, matching praetom's pattern:
 `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`, and
