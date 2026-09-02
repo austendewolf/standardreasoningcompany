@@ -55,12 +55,16 @@ const TOOLS: Tool[] = [
   },
   {
     index: "03",
-    name: "lidar vision",
-    href: "https://antevant.com",
+    name: "roadmarker",
+    href: "https://roadmarker.io",
     purpose: "Real-time perception for the road.",
     operation:
       "Fuses multi-camera depth into a single overhead reconstruction of the vehicle envelope.",
-    url: "https://antevant.com",
+    url: "https://roadmarker.io",
+    access: {
+      label: "Waitlist",
+      href: "https://roadmarker.io/#join",
+    },
   },
   {
     index: "04",
