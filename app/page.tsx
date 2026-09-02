@@ -1,5 +1,6 @@
 import { Sheet } from "./sheet";
 import { Connections } from "./connections";
+import { SectionHead } from "./section-head";
 import { checkHealth, HEALTH_LABEL } from "@/lib/health";
 
 /** Health is re-checked at most once a minute. */
@@ -82,25 +83,6 @@ const TOOLS: Tool[] = [
     purpose: "Tenancy and maintenance records for small property holdings.",
   },
 ];
-
-function SectionHead({
-  no,
-  title,
-  meta,
-}: {
-  no: string;
-  title: string;
-  meta?: string;
-}) {
-  return (
-    <div className="section-head">
-      <span className="title">
-        <span className="section-no">// {no}.</span> {title}
-      </span>
-      {meta ? <span className="count">{meta}</span> : null}
-    </div>
-  );
-}
 
 export default async function Home() {
   // Pinged together rather than in series, so the page waits once.
